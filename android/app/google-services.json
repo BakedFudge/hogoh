@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "921137320302",
+    "firebase_url": "https://hogoh-268fb.firebaseio.com",
+    "project_id": "hogoh-268fb",
+    "storage_bucket": "hogoh-268fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921137320302:android:2b585e5414aef6d03bf17f",
+        "android_client_info": {
+          "package_name": "com.hogoh.hogoh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921137320302-83guqplicl2f3j4m5o4v9gr2hh9hpko3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hogoh.hogoh",
+            "certificate_hash": "bcc5ef79041ed6938518d230fc214eb69a874f51"
+          }
+        },
+        {
+          "client_id": "921137320302-goqa0pr1hiejnltoiu4a765o4m3qk3t1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGNGSxPnxvxzwmuIVKsBWRX9rKwprnanw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921137320302-goqa0pr1hiejnltoiu4a765o4m3qk3t1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
