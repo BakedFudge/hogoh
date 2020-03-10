@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hogoh/Screens/Home/home.dart';
 import 'package:hogoh/Services/Auth.dart';
-import 'package:hogoh/Screens/Authentication/authenticate.dart';
 import 'package:hogoh/Shared/loading.dart';
 
 
@@ -54,7 +52,6 @@ class _SignInState extends State<SignIn> {
                 validator:(val) => val.isEmpty ? 'Enter an Email!': null,
                 obscureText: false,
                 onChanged: (val) {
-
                   setState(() {
                     email=val;
                   });
@@ -105,13 +102,7 @@ class _SignInState extends State<SignIn> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  print('Started');
-
                   _authService.signInWithGoogle().then((FirebaseUser user){
-
-                    //Navigator.of(context).pushReplacementNamed('/home/home');
-
-
                   }).catchError((e) => print(e));
                 },
               ),
