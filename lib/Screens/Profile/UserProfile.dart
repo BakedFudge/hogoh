@@ -22,20 +22,20 @@ class UserProfile extends StatelessWidget with NavigationStates {
         ],
         child: SafeArea(
           child: Scaffold(
-             // backgroundColor: Color(hexColor('#F7FFF7')),
-              body: ListView(
-                children: <Widget>[
-                  //SizedBox(height: 100,),
-                  Container(
-                    padding: EdgeInsets.only(top: 200),
-                    color: Colors.black,
-                    child: Stack(
-                      alignment: AlignmentDirectional.topCenter,
-                      children: <Widget>[
-                        //Avatar
-                         Positioned(
-                          top:0.0,
-                           left: 100.0,
+              backgroundColor: Color(hexColor('#F7FFF7')),
+              body: Container(
+                color: Color(hexColor('#F7FFF7')),
+                height: MediaQuery.of(context).size.height,
+                child: ListView(
+                  children: <Widget>[
+                    Container(
+                      height: MediaQuery.of(context).size.height,
+                      child: Stack(
+                        alignment: AlignmentDirectional.topCenter,
+                        children: <Widget>[
+                          //Avatar
+                          Positioned(
+                          top:100.0,
                            child: Container(
                                 width: 180.0,
                                 height: 180.0,
@@ -45,90 +45,135 @@ class UserProfile extends StatelessWidget with NavigationStates {
                                 )
                             ),
                          ),
-                        //Name Details
-                      Positioned(
-                        // top:100,
-                        child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15.0),
-                                child: Container(
-                                  //padding:EdgeInsets.only(top:20.0),
-                                  height:500.0,
-                                  width: 400.0,
-                                  color: Colors.green[100].withOpacity(0.6),
-//                            child:
-//                            Padding(
-//                              padding: const EdgeInsets.only(top:120.0),
-//                              child: UserDetailHeader(),
-//                            ),
+
+                          //Name Details
+
+                          Positioned(
+                            top: 200,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15.0),
+                              child: Container(
+                                //padding:EdgeInsets.only(top:20.0),
+                                height: 230.0,
+                                width: MediaQuery.of(context).size.width - 30,
+                                color: Colors.white,
+                                child: Stack(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 80.0),
+                                      child: UserDetailHeader(),
+                                    ),
+                                    //Emoticons
+                                    Wrap(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 160.0, left: 80),
+                                          child: new Icon(
+                                            FontAwesomeIcons.grinWink,
+                                            color: Colors.lightGreen,
+                                            size: 40.0,
+                                            //radius: 20.0,
+                                          ),
+                                        ),
+                                        SizedBox(width: 30),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 160.0),
+                                          child: new Icon(
+                                            FontAwesomeIcons.grinHearts,
+                                            color: Colors.amber,
+                                            size: 40.0,
+                                            //radius: 20.0,
+                                          ),
+                                        ),
+                                        SizedBox(width: 30),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 160.0),
+                                          child: new Icon(
+                                            FontAwesomeIcons.smileBeam,
+                                            color: Colors.pink,
+                                            size: 40.0,
+                                            //radius: 20.0,
+                                          ),
+                                        ),
+                                        SizedBox(width: 30),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 160.0),
+                                          child: new Icon(
+                                            FontAwesomeIcons.grinTears,
+                                            color: Colors.blue,
+                                            size: 40.0,
+                                            //radius: 20.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
+                            ),
+                          ),
+
+                          // Inside Circle Avatar
+
+                          Positioned(
+                            top: 120,
+                            child: Container(
+                              width: 150.0,
+                              height: 150.0,
+                              decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
+                                color:  Color(hexColor('#1A535C')),
+                              ),
+                            ),
+                          ),
+
+                          //Detail body
+                          Positioned(
+                            top: 450,
+                            child: Container(
+                                //padding: EdgeInsets.all(20),
+                                height: MediaQuery.of(context).size.height,
+                                width: MediaQuery.of(context).size.width - 30,
+                                child: UserDetailBody()),
+                          ),
+                          //SizedBox(height: 120),
+                        ],
                       ),
-
-
-                       // Inside Circle Avatar
-//                      Positioned(
-//                        top: 20.0,
-//                        child: Container(
-//                          width: 150.0,
-//                          height: 150.0,
-//                          decoration: new BoxDecoration(
-//                            shape: BoxShape.circle,
-//                            color: Color(hexColor('#F6F6FB')),
-//                          ),
-//                        ),
-//                      ),
-
-                        //SizedBox(height: 120),
-
-                      ],
                     ),
-                  ),
-//                  SizedBox(
-//                    height:20,
-//                  ),
-                  //Detail body
-//                  Container(
-//                    padding: EdgeInsets.all(20),
-//                      height: MediaQuery.of(context).size.height,
-//                      width: 400,
-//                      child: UserDetailBody()
-//                  ),
-                ],
+                  ],
+                ),
               )),
         ));
   }
 }
 
-
 class UserDetailHeader extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final doUserProfile currUser = Provider.of<doUserProfile>(context);
-
-    return
-      ListTile(
-        title: Text(
-          currUser.nickname,
-          style: TextStyle(
-            color: Color(hexColor('#1A535C')),
-            fontSize: 30.0,
-            fontWeight: FontWeight.w800,
-          ),
-          textAlign: TextAlign.center,
+    return ListTile(
+      title: Text(
+        currUser.nickname,
+        style: TextStyle(
+          color: Color(hexColor('#1A535C')),
+          fontSize: 30.0,
+          fontWeight: FontWeight.w800,
         ),
-        subtitle: Text(
-          currUser.tag,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 15.0,
-            fontWeight: FontWeight.w200,
-          ),
-          textAlign: TextAlign.center,
+        textAlign: TextAlign.center,
+      ),
+      subtitle: Text(
+        currUser.tag,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 15.0,
+          fontWeight: FontWeight.w200,
         ),
-
-      );
-
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }
 
@@ -138,8 +183,7 @@ class UserProfileDetails extends StatelessWidget {
     var currUser = Provider.of<doUserProfile>(context);
     print(currUser.username);
     print(currUser.uid);
-    return ListView(shrinkWrap: true, children: <Widget>[
-      ListTile(
+    return ListTile(
         title: Text(
           currUser.nickname,
           style: TextStyle(
@@ -158,8 +202,7 @@ class UserProfileDetails extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-      ),
-    ]);
+      );
   }
 }
 
@@ -210,101 +253,106 @@ class _UserDetailBodyState extends State<UserDetailBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints.expand(height: 100),
-      padding: EdgeInsets.all(20),
-      color: Colors.green[50],
-      child: ListView(
-        children: <Widget>[
-          //Foodfolio
-          ListTile(
-            title: Text(
-              "FoodFolio",
-              textAlign: TextAlign.center,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15.0),
+      child: Container(
+        constraints: BoxConstraints.expand(height: 100),
+        padding: EdgeInsets.all(20),
+        color: Colors.white,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+
+          children: <Widget>[
+            //Foodfolio
+            ListTile(
+              title: Text(
+                "FoodFolio",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(hexColor('#1A535C')),
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+            //Cusines
+            Text(
+              'Fav Cuisines :',
               style: TextStyle(
                 color: Color(hexColor('#1A535C')),
-                fontSize: 30.0,
-                fontWeight: FontWeight.w800,
+                fontSize: 20.0,
+                fontWeight: FontWeight.w400,
               ),
             ),
-          ),
-          //Cusines
-          Text(
-            'Fav Cuisines :',
-            style: TextStyle(
-              color: Color(hexColor('#1A535C')),
-              fontSize: 20.0,
-              fontWeight: FontWeight.w400,
+            Wrap(
+              children: actorWidgets.toList(),
             ),
-          ),
-          Wrap(
-            children: actorWidgets.toList(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          //Dish
-          Text(
-            'Fav Dish :',
-            style: TextStyle(
-              color: Color(hexColor('#1A535C')),
-              fontSize: 20.0,
-              fontWeight: FontWeight.w400,
+            SizedBox(
+              height: 20,
             ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          //Fav Dish
-          Wrap(
-            children: <Widget>[
-              Icon(
-                FontAwesomeIcons.hamburger,
-                color: Colors.lightGreen,
-                size: 40.0,
-                //radius: 20.0,
+            //Dish
+            Text(
+              'Fav Dish :',
+              style: TextStyle(
+                color: Color(hexColor('#1A535C')),
+                fontSize: 20.0,
+                fontWeight: FontWeight.w400,
               ),
-              SizedBox(width: 30),
-              Icon(
-                FontAwesomeIcons.pizzaSlice,
-                color: Colors.amber,
-                size: 40.0,
-                //radius: 20.0,
-              ),
-              SizedBox(width: 30),
-              Icon(
-                FontAwesomeIcons.birthdayCake,
-                color: Colors.pink,
-                size: 40.0,
-                //radius: 20.0,
-              ),
-              SizedBox(width: 30),
-              Icon(
-                FontAwesomeIcons.iceCream,
-                color: Colors.blue,
-                size: 40.0,
-                //radius: 20.0,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          //Foodies
-          Text(
-            'Fav Foodies :',
-            style: TextStyle(
-              color: Color(hexColor('#1A535C')),
-              fontSize: 20.0,
-              fontWeight: FontWeight.w400,
             ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
+            SizedBox(
+              height: 10,
+            ),
+            //Fav Dish
+            Wrap(
+              children: <Widget>[
+                Icon(
+                  FontAwesomeIcons.hamburger,
+                  color: Colors.lightGreen,
+                  size: 40.0,
+                  //radius: 20.0,
+                ),
+                SizedBox(width: 30),
+                Icon(
+                  FontAwesomeIcons.pizzaSlice,
+                  color: Colors.amber,
+                  size: 40.0,
+                  //radius: 20.0,
+                ),
+                SizedBox(width: 30),
+                Icon(
+                  FontAwesomeIcons.birthdayCake,
+                  color: Colors.pink,
+                  size: 40.0,
+                  //radius: 20.0,
+                ),
+                SizedBox(width: 30),
+                Icon(
+                  FontAwesomeIcons.iceCream,
+                  color: Colors.blue,
+                  size: 40.0,
+                  //radius: 20.0,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            //Foodies
+            Text(
+              'Fav Foodies :',
+              style: TextStyle(
+                color: Color(hexColor('#1A535C')),
+                fontSize: 20.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
 
-          Wrap(),
-        ],
+            Wrap(),
+          ],
+        ),
       ),
     );
   }
