@@ -13,16 +13,7 @@ class UserProfile extends StatelessWidget with NavigationStates {
   Widget build(BuildContext context) {
     print('inside');
     var uid = Provider.of<doUserProfile>(context).uid;
-//    var linearGradient = const BoxDecoration(
-//      gradient: const LinearGradient(
-//        begin: FractionalOffset.centerRight,
-//        end: FractionalOffset.bottomLeft,
-//        colors: <Color>[
-//          const Color(0xFF413070),
-//          const Color(0xFF2B264A),
-//        ],
-//      ),
-//    ); Linea//
+
     return MultiProvider(
         providers: [
           StreamProvider<doUserProfile>.value(
@@ -31,211 +22,115 @@ class UserProfile extends StatelessWidget with NavigationStates {
         ],
         child: SafeArea(
           child: Scaffold(
-              body: SingleChildScrollView(
-            child: new Container(
-              color: Color(hexColor('#F6F6FB')),
-              padding: EdgeInsets.only(top: 100, left: 20, right: 20),
-              child: Stack(
-                alignment: AlignmentDirectional.topCenter,
+             // backgroundColor: Color(hexColor('#F7FFF7')),
+              body: ListView(
                 children: <Widget>[
-                  //Avatar
-                  Positioned(
-                    top: 0.0,
-                    child: Container(
-                        width: 180.0,
-                        height: 180.0,
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        )),
+                  //SizedBox(height: 100,),
+                  Container(
+                    padding: EdgeInsets.only(top: 200),
+                    color: Colors.black,
+                    child: Stack(
+                      alignment: AlignmentDirectional.topCenter,
+                      children: <Widget>[
+                        //Avatar
+                         Positioned(
+                          top:0.0,
+                           left: 100.0,
+                           child: Container(
+                                width: 180.0,
+                                height: 180.0,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color(hexColor('#FFE66D')),
+                                )
+                            ),
+                         ),
+                        //Name Details
+                      Positioned(
+                        // top:100,
+                        child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15.0),
+                                child: Container(
+                                  //padding:EdgeInsets.only(top:20.0),
+                                  height:500.0,
+                                  width: 400.0,
+                                  color: Colors.green[100].withOpacity(0.6),
+//                            child:
+//                            Padding(
+//                              padding: const EdgeInsets.only(top:120.0),
+//                              child: UserDetailHeader(),
+//                            ),
+                                ),
+                              ),
+                      ),
+
+
+                       // Inside Circle Avatar
+//                      Positioned(
+//                        top: 20.0,
+//                        child: Container(
+//                          width: 150.0,
+//                          height: 150.0,
+//                          decoration: new BoxDecoration(
+//                            shape: BoxShape.circle,
+//                            color: Color(hexColor('#F6F6FB')),
+//                          ),
+//                        ),
+//                      ),
+
+                        //SizedBox(height: 120),
+
+                      ],
+                    ),
                   ),
-                  //Name Details
-                  Positioned(
-                    top: 60.0,
-                    child: Container(
-                      height: 250.0,
-                      width: 400.0,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.only(top: 120),
-                        child:UserDetailHeader() ,
-                      ),
-                      //color: Colors.white,
-                    ),
-                  ),
-                  Positioned(
-                    top:20.0,
-                    child: Container(
-                        width:150.0,
-                        height: 150.0,
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(hexColor('#826F4C'))
-                        ),
-
-                    ),
-                  ),
-
-                //Emoticons
-                  Wrap(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only( top:250.0,left: 0),
-                      child: new Icon(FontAwesomeIcons.grinWink,
-                        color: Colors.lightGreen,
-                        size: 40.0,
-                        //radius: 20.0,
-                      ),
-                    ),
-                    SizedBox(width: 30),
-                    Padding(
-                      padding: const EdgeInsets.only( top:250.0),
-                      child: new Icon(FontAwesomeIcons.grinHearts,
-                        color: Colors.amber,
-                        size: 40.0,
-                        //radius: 20.0,
-                      ),
-                    ),
-                    SizedBox(width: 30),
-                    Padding(
-                      padding: const EdgeInsets.only( top:250.0),
-                      child: new Icon(FontAwesomeIcons.smileBeam,
-                        color: Colors.pink,
-                        size: 40.0,
-                        //radius: 20.0,
-                      ),
-                    ),
-                    SizedBox(width: 30),
-                    Padding(
-                      padding: const EdgeInsets.only( top:250.0),
-                      child: new Icon(FontAwesomeIcons.grinTears,
-                        color: Colors.blue,
-                        size: 40.0,
-                        //radius: 20.0,
-                      ),
-                    ),
-
-
-                  ],
-                ),
-
-                  SizedBox(height: 50.0),
-
-                  //Header & Body Details
-                  new Container(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 330.0),
-                      child: new Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          //Detail body
-                          Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: UserDetailBody(),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
+//                  SizedBox(
+//                    height:20,
+//                  ),
+                  //Detail body
+//                  Container(
+//                    padding: EdgeInsets.all(20),
+//                      height: MediaQuery.of(context).size.height,
+//                      width: 400,
+//                      child: UserDetailBody()
+//                  ),
                 ],
-              ),
-            ),
-          )),
+              )),
         ));
   }
 }
 
-//StateLess
-//class UserProfile extends StatelessWidget with NavigationStates {
-//  @override
-//  Widget build(BuildContext context) {
-//    print('inside');
-//    var uid = Provider.of<doUserProfile>(context).uid;
-//    var linearGradient = const BoxDecoration(
-//      gradient: const LinearGradient(
-//        begin: FractionalOffset.centerRight,
-//        end: FractionalOffset.bottomLeft,
-//        colors: <Color>[
-//          const Color(0xFF413070),
-//          const Color(0xFF2B264A),
-//        ],
-//      ),
-//    );
-//
-//    return MultiProvider(
-//        providers: [
-//
-//          StreamProvider<doUserProfile>.value(
-//            value: DatabaseService().getCurrentUserFromSnapshot(uid),
-//          )
-//        ],
-//        child: Scaffold(
-//            body: SingleChildScrollView(
-//              child: new Container(
-//                  decoration:linearGradient ,
-//                  child:
-//                    Column(
-//                      children: <Widget>[
-//                        new Container(
-//                          height: 250.0,
-//                          color: Colors.white,
-//                          child: new Column(
-//                            children: <Widget>[
-//                              Padding(
-//                                padding: EdgeInsets.only(top: 50.0),
-//                                child: new Stack(
-//                                    fit: StackFit.loose,
-//                                    children: <Widget>[
-//                                      new Row(
-//                                        crossAxisAlignment:
-//                                        CrossAxisAlignment.center,
-//                                        mainAxisAlignment: MainAxisAlignment.center,
-//                                        children: <Widget>[
-//                                          new Container(
-//                                              width: 200.0,
-//                                              height: 200.0,
-//                                              decoration: new BoxDecoration(
-//                                                shape: BoxShape.circle,
-//                                                color: Color(hexColor('#FFE66D')),
-//                                              )),
-//                                        ],
-//                                      ),
-//                                    ]),
-//                              )
-//                            ],
-//                          ),
-//                        ),
-//                        SizedBox(height: 10.0),
-//                       UserProfileDetails(),
-//                        new Container(
-//                          color: Color(0xffFFFFFF),
-//                          child: Padding(
-//                            padding: EdgeInsets.only(bottom: 25.0),
-//                            child: new Column(
-//                              crossAxisAlignment: CrossAxisAlignment.start,
-//                              mainAxisAlignment: MainAxisAlignment.start,
-//                              children: <Widget>[
-//                                Padding(
-//                                  padding: const EdgeInsets.all(40.0),
-//                                  child:
-//                                  FriendDetailBody(widget.friend)
-//                                ),
-//
-//
-//
-//                              ],
-//                            ),
-//                          ),
-//                        )],
-//                    )
-//              ),
-//            )
-//        )
-//    );
-//  }
-//}
+
+class UserDetailHeader extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    final doUserProfile currUser = Provider.of<doUserProfile>(context);
+
+    return
+      ListTile(
+        title: Text(
+          currUser.nickname,
+          style: TextStyle(
+            color: Color(hexColor('#1A535C')),
+            fontSize: 30.0,
+            fontWeight: FontWeight.w800,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        subtitle: Text(
+          currUser.tag,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 15.0,
+            fontWeight: FontWeight.w200,
+          ),
+          textAlign: TextAlign.center,
+        ),
+
+      );
+
+  }
+}
 
 class UserProfileDetails extends StatelessWidget {
   @override
@@ -268,265 +163,149 @@ class UserProfileDetails extends StatelessWidget {
   }
 }
 
-class UserDetailHeader extends StatelessWidget {
-
-  Widget _createCircleBadge(IconData iconData, Color color) {
-    return new Padding(
-      padding: const EdgeInsets.only(left: 30.0),
-      child: new CircleAvatar(
-        backgroundColor: color,
-        child: new Icon(
-          iconData,
-          color: Colors.black,
-          size: 16.0,
-        ),
-        radius: 16.0,
-      ),
-    );
-  }
-
+class UserDetailBody extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    final doUserProfile currUser = Provider.of<doUserProfile>(context);
-
-    return ListView(shrinkWrap: true, children: <Widget>[
-      ListTile(
-        title: Text(
-          currUser.nickname,
-          style: TextStyle(
-            color: Color(hexColor('#1A535C')),
-            fontSize: 30.0,
-            fontWeight: FontWeight.w800,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        subtitle: Text(
-          currUser.tag,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 15.0,
-            fontWeight: FontWeight.w200,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    ]);
-  }
+  _UserDetailBodyState createState() => _UserDetailBodyState();
 }
 
-class LevelSlider extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+class CusinesFilterEntry {
+  const CusinesFilterEntry(this.cusineName);
+
+  final String cusineName;
 }
 
-class UserDetailBody extends StatelessWidget {
+class _UserDetailBodyState extends State<UserDetailBody> {
+  final List<CusinesFilterEntry> _cusines = <CusinesFilterEntry>[
+    const CusinesFilterEntry('Indian'),
+    const CusinesFilterEntry('Chinese'),
+    const CusinesFilterEntry('Italian'),
+    const CusinesFilterEntry('Eastern'),
+    const CusinesFilterEntry('Turkish'),
+    const CusinesFilterEntry('Chettinad'),
+  ];
+  List<String> _filters = <String>[];
+
+  Iterable<Widget> get actorWidgets sync* {
+    for (CusinesFilterEntry actor in _cusines) {
+      yield Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: ChoiceChip(
+          label: Text(actor.cusineName),
+          selected: _filters.contains(actor.cusineName),
+          onSelected: (bool value) {
+            setState(() {
+              if (value) {
+                _filters.add(actor.cusineName);
+              } else {
+                _filters.removeWhere((String name) {
+                  return name == actor.cusineName;
+                });
+              }
+            });
+          },
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints.expand(height: 1900),
-      padding: EdgeInsets.only(top:10.0),
-      color: Colors.white,
+      constraints: BoxConstraints.expand(height: 100),
+      padding: EdgeInsets.all(20),
+      color: Colors.green[50],
       child: ListView(
         children: <Widget>[
+          //Foodfolio
           ListTile(
             title: Text(
               "FoodFolio",
               textAlign: TextAlign.center,
-              style: GoogleFonts.holtwoodOneSC(
-                fontSize: 30,
-                color:Color(hexColor('#5B68C7')),
-                letterSpacing: 15,
-                fontWeight: FontWeight.w100,
+              style: TextStyle(
+                color: Color(hexColor('#1A535C')),
+                fontSize: 30.0,
+                fontWeight: FontWeight.w800,
               ),
             ),
-
           ),
-          ListTile(
-            title: Text(
-              'Fav Dish :',
-              style: GoogleFonts.holtwoodOneSC(
-                fontSize: 30,
-                color:Color(hexColor('#5B68C7')),
-               // letterSpacing: 15,
-                fontWeight: FontWeight.normal,
-              ),
+          //Cusines
+          Text(
+            'Fav Cuisines :',
+            style: TextStyle(
+              color: Color(hexColor('#1A535C')),
+              fontSize: 20.0,
+              fontWeight: FontWeight.w400,
             ),
-            //isThreeLine: true,
-          )
+          ),
+          Wrap(
+            children: actorWidgets.toList(),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          //Dish
+          Text(
+            'Fav Dish :',
+            style: TextStyle(
+              color: Color(hexColor('#1A535C')),
+              fontSize: 20.0,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          //Fav Dish
+          Wrap(
+            children: <Widget>[
+              Icon(
+                FontAwesomeIcons.hamburger,
+                color: Colors.lightGreen,
+                size: 40.0,
+                //radius: 20.0,
+              ),
+              SizedBox(width: 30),
+              Icon(
+                FontAwesomeIcons.pizzaSlice,
+                color: Colors.amber,
+                size: 40.0,
+                //radius: 20.0,
+              ),
+              SizedBox(width: 30),
+              Icon(
+                FontAwesomeIcons.birthdayCake,
+                color: Colors.pink,
+                size: 40.0,
+                //radius: 20.0,
+              ),
+              SizedBox(width: 30),
+              Icon(
+                FontAwesomeIcons.iceCream,
+                color: Colors.blue,
+                size: 40.0,
+                //radius: 20.0,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          //Foodies
+          Text(
+            'Fav Foodies :',
+            style: TextStyle(
+              color: Color(hexColor('#1A535C')),
+              fontSize: 20.0,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+
+          Wrap(),
         ],
       ),
-
     );
   }
 }
-
-//class dummy extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    return Container(
-//
-//      Padding(
-//          padding: EdgeInsets.only(
-//              left: 25.0, right: 25.0, top: 25.0),
-//          child: new Row(
-//            mainAxisAlignment:
-//            MainAxisAlignment.spaceBetween,
-//            mainAxisSize: MainAxisSize.max,
-//            children: <Widget>[
-//              new Column(
-//                mainAxisAlignment:
-//                MainAxisAlignment.start,
-//                mainAxisSize: MainAxisSize.min,
-//                children: <Widget>[
-//                  new Text(
-//                    'Personal Information',
-//                    style: TextStyle(
-//                        fontSize: 18.0,
-//                        fontWeight: FontWeight.bold),
-//                  ),
-//                ],
-//              ),
-//              new Column(
-//                mainAxisAlignment: MainAxisAlignment.end,
-//                mainAxisSize: MainAxisSize.min,
-//                children: <Widget>[
-//                  new Container(),
-//                ],
-//              )
-//            ],
-//          )),
-//      Padding(
-//          padding: EdgeInsets.only(
-//              left: 25.0, right: 25.0, top: 25.0),
-//          child: new Row(
-//            mainAxisSize: MainAxisSize.max,
-//            children: <Widget>[
-//              new Column(
-//                mainAxisAlignment:
-//                MainAxisAlignment.start,
-//                mainAxisSize: MainAxisSize.min,
-//                children: <Widget>[
-//                  new Text(
-//                    'Email ID',
-//                    style: TextStyle(
-//                        fontSize: 16.0,
-//                        fontWeight: FontWeight.bold),
-//                  ),
-//                ],
-//              ),
-//            ],
-//          )),
-//      Padding(
-//          padding: EdgeInsets.only(
-//              left: 25.0, right: 25.0, top: 2.0),
-//          child: new Row(
-//            mainAxisSize: MainAxisSize.max,
-//            children: <Widget>[
-//              new Flexible(
-//                child: new TextField(
-//                  decoration: const InputDecoration(
-//                      hintText: "Enter Email ID"),
-//                ),
-//              ),
-//            ],
-//          )),
-//      Padding(
-//          padding: EdgeInsets.only(
-//              left: 25.0, right: 25.0, top: 25.0),
-//          child: new Row(
-//            mainAxisSize: MainAxisSize.max,
-//            children: <Widget>[
-//              new Column(
-//                mainAxisAlignment:
-//                MainAxisAlignment.start,
-//                mainAxisSize: MainAxisSize.min,
-//                children: <Widget>[
-//                  new Text(
-//                    'Mobile',
-//                    style: TextStyle(
-//                        fontSize: 16.0,
-//                        fontWeight: FontWeight.bold),
-//                  ),
-//                ],
-//              ),
-//            ],
-//          )),
-//      Padding(
-//          padding: EdgeInsets.only(
-//              left: 25.0, right: 25.0, top: 2.0),
-//          child: new Row(
-//            mainAxisSize: MainAxisSize.max,
-//            children: <Widget>[
-//              new Flexible(
-//                child: new TextField(
-//                  decoration: const InputDecoration(
-//                      hintText: "Enter Mobile Number"),
-//                  //enabled: !_status,
-//                ),
-//              ),
-//            ],
-//          )),
-//      Padding(
-//          padding: EdgeInsets.only(
-//              left: 25.0, right: 25.0, top: 25.0),
-//          child: new Row(
-//            mainAxisSize: MainAxisSize.max,
-//            mainAxisAlignment: MainAxisAlignment.start,
-//            children: <Widget>[
-//              Expanded(
-//                child: Container(
-//                  child: new Text(
-//                    'Pin Code',
-//                    style: TextStyle(
-//                        fontSize: 16.0,
-//                        fontWeight: FontWeight.bold),
-//                  ),
-//                ),
-//                flex: 2,
-//              ),
-//              Expanded(
-//                child: Container(
-//                  child: new Text(
-//                    'State',
-//                    style: TextStyle(
-//                        fontSize: 16.0,
-//                        fontWeight: FontWeight.bold),
-//                  ),
-//                ),
-//                flex: 2,
-//              ),
-//            ],
-//          )),
-//      Padding(
-//          padding: EdgeInsets.only(
-//              left: 25.0, right: 25.0, top: 2.0),
-//          child: new Row(
-//            mainAxisSize: MainAxisSize.max,
-//            mainAxisAlignment: MainAxisAlignment.start,
-//            children: <Widget>[
-//              Flexible(
-//                child: Padding(
-//                  padding: EdgeInsets.only(right: 10.0),
-//                  child: new TextField(
-//                    decoration: const InputDecoration(
-//                        hintText: "Enter Pin Code"),
-//                    //enabled: !_status,
-//                  ),
-//                ),
-//                flex: 2,
-//              ),
-//              Flexible(
-//                child: new TextField(
-//                  decoration: const InputDecoration(
-//                      hintText: "Enter State"),
-//                  // enabled: !_status,
-//                ),
-//                flex: 2,
-//              ),
-//            ],
-//          )),
-//    );
-//  }
-//}
