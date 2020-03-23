@@ -7,6 +7,8 @@ import 'package:hogoh/Shared/navigationBloc.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 
 class UserProfile extends StatelessWidget with NavigationStates {
   @override
@@ -22,9 +24,10 @@ class UserProfile extends StatelessWidget with NavigationStates {
         ],
         child: SafeArea(
           child: Scaffold(
-              backgroundColor: Color(hexColor('#F7FFF7')),
+
+              backgroundColor: Color(hexColor('#E9ED8A')),
               body: Container(
-                color: Color(hexColor('#F7FFF7')),
+                color: Colors.white,
                 height: MediaQuery.of(context).size.height,
                 child: ListView(
                   children: <Widget>[
@@ -41,7 +44,7 @@ class UserProfile extends StatelessWidget with NavigationStates {
                                 height: 180.0,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Color(hexColor('#FFE66D')),
+                                  color: Color(hexColor('#7bed9f')),
                                 )
                             ),
                          ),
@@ -56,7 +59,7 @@ class UserProfile extends StatelessWidget with NavigationStates {
                                 //padding:EdgeInsets.only(top:20.0),
                                 height: 230.0,
                                 width: MediaQuery.of(context).size.width - 30,
-                                color: Colors.white,
+                                color: Color(hexColor('#F7FFF7')),
                                 child: Stack(
                                   children: <Widget>[
                                     Padding(
@@ -125,7 +128,7 @@ class UserProfile extends StatelessWidget with NavigationStates {
                               height: 150.0,
                               decoration: new BoxDecoration(
                                 shape: BoxShape.circle,
-                                color:  Color(hexColor('#1A535C')),
+                                color:  Color(hexColor('#2ed573')),
                               ),
                             ),
                           ),
@@ -146,6 +149,7 @@ class UserProfile extends StatelessWidget with NavigationStates {
                   ],
                 ),
               )),
+
         ));
   }
 }
@@ -153,7 +157,9 @@ class UserProfile extends StatelessWidget with NavigationStates {
 class UserDetailHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print('Inside Detail Header');
     final doUserProfile currUser = Provider.of<doUserProfile>(context);
+    print(currUser.nickname);
     return ListTile(
       title: Text(
         currUser.nickname,
@@ -258,7 +264,7 @@ class _UserDetailBodyState extends State<UserDetailBody> {
       child: Container(
         constraints: BoxConstraints.expand(height: 100),
         padding: EdgeInsets.all(20),
-        color: Colors.white,
+        color:Color(hexColor('#F7FFF7')),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
 
