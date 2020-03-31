@@ -56,6 +56,7 @@ class AuthService {
         user.displayName,
         user.displayName,
         "I am " + user.displayName,
+"N"
 //        'Test About me...',
 //        DateTime.now(),
 //        '',
@@ -102,6 +103,7 @@ class AuthService {
         user.displayName,
         user.displayName,
         'I am' + user.displayName,
+        'N'
         //'Test About me...',
 //        DateTime.now(),
 //        '',

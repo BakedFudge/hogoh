@@ -184,6 +184,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fluttery_dart2:
+    dependency: "direct main"
+    description:
+      name: fluttery_dart2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.9"
   font_awesome_flutter:
     dependency: "direct main"
     description:
@@ -345,6 +352,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+  rounded_floating_app_bar:
+    dependency: "direct main"
+    description:
+      name: rounded_floating_app_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   rxdart:
     dependency: "direct main"
     description:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hogoh/Models/commonHelper.dart';
 import 'package:hogoh/Services/Auth.dart';
 
 class Register extends StatefulWidget {
@@ -21,9 +22,9 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.deepOrange[20],
+        backgroundColor: Color(hexColor('#F7FFF7')),
         appBar: AppBar(
-          backgroundColor: Colors.deepOrangeAccent[200],
+          backgroundColor: Color(hexColor('#7bed9f')),
           actions: <Widget>[
             FlatButton.icon(
                 icon: Icon(Icons.person),
@@ -61,7 +62,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 30.0),
                 RaisedButton(
-                  color: Colors.deepOrange[400],
+                  color: Color(hexColor('#7bed9f')),
                   child: Text(
                     'Register',
                     style: TextStyle(color: Colors.white),

@@ -9,11 +9,11 @@ class doUserProfile{
 //  final DateTime dob;
 //  final String city;
 //  final String gender;
-//  final String veg_nv;
+  final String veg_nonveg;
 //  final String fans;
 //  final double level;
 
-  doUserProfile({this.uid,this.username,this.nickname,this.tag
+  doUserProfile({this.uid,this.username,this.nickname,this.tag,this.veg_nonveg
 //    , this.about,this.dob,this.city,this.gender,this.veg_nv,
 //  this.fans,this.level
   });
@@ -28,7 +28,7 @@ class doUserProfile{
 //      dob: data['dob'],
 //      city: data['city'],
 //      gender: data['gender'],
-//      veg_nv: data['veg_nv'],
+      veg_nonveg: data['veg_nonveg'],
 //      fans: data['fans'],
 //      level: data['level']
     );

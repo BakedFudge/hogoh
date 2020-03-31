@@ -25,7 +25,6 @@ class _AuthenticateState extends State<Authenticate> {
     if(showSignIn)
       {
         print('sign in auth');
-
         return SignIn(toggleView : toggleView);
       }
     else

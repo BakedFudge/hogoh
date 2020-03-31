@@ -1,6 +1,8 @@
 
 
-
+//
+//color: Color(hexColor('#7bed9f')),
+//backgroundColor: Color(hexColor('#F7FFF7')),
 /*
 * Primary lime Green :Color(hexColor('#2ed573')),
 * Secondary green : Color(hexColor('#7bed9f')),

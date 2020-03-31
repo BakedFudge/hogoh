@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hogoh/Models/commonHelper.dart';
 import 'package:hogoh/Models/doUserProfile.dart';
+import 'package:hogoh/Screens/Profile/UserProfileEdit.dart';
 import 'package:hogoh/Services/database.dart';
 import 'package:hogoh/Shared/navigationBloc.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,7 @@ class UserProfile extends StatelessWidget with NavigationStates {
   Widget build(BuildContext context) {
     print('inside');
     var uid = Provider.of<doUserProfile>(context).uid;
-
+    bool isEditMode = false;
     return MultiProvider(
         providers: [
           StreamProvider<doUserProfile>.value(
@@ -24,30 +25,28 @@ class UserProfile extends StatelessWidget with NavigationStates {
         ],
         child: SafeArea(
           child: Scaffold(
-
-              backgroundColor: Color(hexColor('#E9ED8A')),
+              backgroundColor: Color(hexColor('#F7FFF7')),
               body: Container(
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height,
+                color: Color(hexColor('#F7FFF7')),
+                // height: MediaQuery.of(context).size.height,
                 child: ListView(
                   children: <Widget>[
                     Container(
-                      height: MediaQuery.of(context).size.height,
+                      height: 1000, // MediaQuery.of(context).size.height,
                       child: Stack(
                         alignment: AlignmentDirectional.topCenter,
                         children: <Widget>[
                           //Avatar
                           Positioned(
-                          top:100.0,
-                           child: Container(
+                            top: 100.0,
+                            child: Container(
                                 width: 180.0,
                                 height: 180.0,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Color(hexColor('#7bed9f')),
-                                )
-                            ),
-                         ),
+                                )),
+                          ),
 
                           //Name Details
 
@@ -59,7 +58,7 @@ class UserProfile extends StatelessWidget with NavigationStates {
                                 //padding:EdgeInsets.only(top:20.0),
                                 height: 230.0,
                                 width: MediaQuery.of(context).size.width - 30,
-                                color: Color(hexColor('#F7FFF7')),
+                                color: Colors.white70,
                                 child: Stack(
                                   children: <Widget>[
                                     Padding(
@@ -70,7 +69,8 @@ class UserProfile extends StatelessWidget with NavigationStates {
                                     Wrap(
                                       children: <Widget>[
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 160.0, left: 80),
+                                          padding: const EdgeInsets.only(
+                                              top: 160.0, left: 80),
                                           child: new Icon(
                                             FontAwesomeIcons.grinWink,
                                             color: Colors.lightGreen,
@@ -128,9 +128,20 @@ class UserProfile extends StatelessWidget with NavigationStates {
                               height: 150.0,
                               decoration: new BoxDecoration(
                                 shape: BoxShape.circle,
-                                color:  Color(hexColor('#2ed573')),
+                                color: Color(hexColor('#2ed573')),
                               ),
                             ),
+                          ),
+
+                          //Detail body
+                          Positioned(
+                            top: 450,
+                            //bottom:1000,
+                            child: Container(
+                                //padding: EdgeInsets.all(20),
+                                height: MediaQuery.of(context).size.height,
+                                width: MediaQuery.of(context).size.width - 30,
+                                child: UserDetailBody()),
                           ),
 
                           //Detail body
@@ -142,14 +153,13 @@ class UserProfile extends StatelessWidget with NavigationStates {
                                 width: MediaQuery.of(context).size.width - 30,
                                 child: UserDetailBody()),
                           ),
-                          //SizedBox(height: 120),
+                          SizedBox(height: 120),
                         ],
                       ),
                     ),
                   ],
                 ),
               )),
-
         ));
   }
 }
@@ -190,37 +200,31 @@ class UserProfileDetails extends StatelessWidget {
     print(currUser.username);
     print(currUser.uid);
     return ListTile(
-        title: Text(
-          currUser.nickname,
-          style: TextStyle(
-            color: Color(hexColor('#1A535C')),
-            fontSize: 30.0,
-            fontWeight: FontWeight.w800,
-          ),
-          textAlign: TextAlign.center,
+      title: Text(
+        currUser.nickname,
+        style: TextStyle(
+          color: Color(hexColor('#1A535C')),
+          fontSize: 30.0,
+          fontWeight: FontWeight.w800,
         ),
-        subtitle: Text(
-          currUser.tag,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 15.0,
-            fontWeight: FontWeight.w200,
-          ),
-          textAlign: TextAlign.center,
+        textAlign: TextAlign.center,
+      ),
+      subtitle: Text(
+        currUser.tag,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 15.0,
+          fontWeight: FontWeight.w200,
         ),
-      );
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }
 
 class UserDetailBody extends StatefulWidget {
   @override
   _UserDetailBodyState createState() => _UserDetailBodyState();
-}
-
-class CusinesFilterEntry {
-  const CusinesFilterEntry(this.cusineName);
-
-  final String cusineName;
 }
 
 class _UserDetailBodyState extends State<UserDetailBody> {
@@ -259,18 +263,33 @@ class _UserDetailBodyState extends State<UserDetailBody> {
 
   @override
   Widget build(BuildContext context) {
+    print("UserDetailBody");
+    var currUser = Provider.of<doUserProfile>(context);
+    print(currUser.nickname);
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
       child: Container(
         constraints: BoxConstraints.expand(height: 100),
         padding: EdgeInsets.all(20),
-        color:Color(hexColor('#F7FFF7')),
+        color: Colors.white70,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: <Widget>[
             //Foodfolio
             ListTile(
+              trailing: FloatingActionButton(
+                  onPressed: () {
+                    Hero(
+                      tag: 'edit',
+                        child: UserProfileEdit());
+                  },
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    FontAwesomeIcons.edit,
+                    color: Colors.green,
+                    size: 30.0,
+                    //radius: 20.0,
+                  )),
               title: Text(
                 "FoodFolio",
                 textAlign: TextAlign.center,
@@ -341,25 +360,60 @@ class _UserDetailBodyState extends State<UserDetailBody> {
               ],
             ),
             SizedBox(
-              height: 20,
-            ),
-            //Foodies
-            Text(
-              'Fav Foodies :',
-              style: TextStyle(
-                color: Color(hexColor('#1A535C')),
-                fontSize: 20.0,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            SizedBox(
               height: 10,
             ),
+            Divider(
+              height: 50,
+              thickness: 0.5,
+              color: Colors.green[200].withOpacity(0.5),
+              indent: 5,
+              endIndent: 5,
+            ),
+            SizedBox(
+              height: 20,
+            ),
 
-            Wrap(),
+            Center(
+              child: Wrap(
+                children: <Widget>[
+                  Icon(
+                    FontAwesomeIcons.drumstickBite,
+                    color: currUser.veg_nonveg == 'N'
+                        ? Colors.red
+                        : Colors.grey, //Colors.red,
+                    size: 40.0,
+                    //radius: 20.0,
+                  ),
+                  SizedBox(width: 30),
+                  Icon(
+                    FontAwesomeIcons.carrot,
+                    color: currUser.veg_nonveg == 'V'
+                        ? Colors.green
+                        : Colors.grey, //Colors.red,
+                    size: 40.0,
+                    //radius: 20.0,
+                  ),
+                  SizedBox(width: 30),
+                  Icon(
+                    FontAwesomeIcons.egg,
+                    color: currUser.veg_nonveg == 'E'
+                        ? Colors.amberAccent
+                        : Colors.grey, //Colors.red,
+                    size: 40.0,
+                    //radius: 20.0,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+class CusinesFilterEntry {
+  const CusinesFilterEntry(this.cusineName);
+
+  final String cusineName;
 }
