@@ -1,23 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hogoh/Models/doUserProfile.dart';
+import 'package:hogoh/Models/user.dart';
 import 'package:hogoh/Services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  doUserProfile _userfFromFirebaseUser(FirebaseUser user) {
-    return user != null ? doUserProfile(uid: user.uid) : null;
-  }
+//  Future getCurrentUser() async {
+//    return await _auth.currentUser();
+//  }
 
-  Future getCurrentUser() async {
-    return await _auth.currentUser();
+  doUserProfile _userfFromFirebaseUser(FirebaseUser user) {
+    return user != null
+        ? doUserProfile(uid: user.uid, username: user.displayName,nickname: user.displayName)
+        : null;
   }
 
   Stream<doUserProfile> get authUser {
     return _auth.onAuthStateChanged.map(_userfFromFirebaseUser);
   }
+
 
   //Sign In Anonymously
   Future signInAnon() async {
@@ -37,6 +41,9 @@ class AuthService {
       AuthResult result =
           await _auth.signInWithEmailAndPassword(email: email, password: pwd);
       FirebaseUser user = result.user;
+      var userid = user.uid;
+      print('User from Firebase : $userid');
+
       print('Insidde Auth');
       return _userfFromFirebaseUser(user);
     } catch (e) {
@@ -51,20 +58,10 @@ class AuthService {
           email: email, password: pwd);
       final FirebaseUser user = result.user;
 
-      await DatabaseService(uid: user.uid).updateUserProfileDate(
-        user.uid,
-        user.displayName,
-        user.displayName,
-        "I am " + user.displayName,
-"N"
-//        'Test About me...',
-//        DateTime.now(),
-//        '',
-//        '',
-//        '',
-//        '',
-//        0,
-      );
+      print('User from Firebase : $user');
+
+      await DatabaseService(uid: user.uid).updateUserProfileData(user.uid,
+          user.displayName, user.displayName, "I am " + user.displayName, "N");
       return _userfFromFirebaseUser(user);
     } catch (e) {
       print('Error in registering');
@@ -98,21 +95,9 @@ class AuthService {
       final FirebaseUser user =
           (await _auth.signInWithCredential(credential)).user;
       print("Google signed in " + user.displayName);
-      await DatabaseService(uid: user.uid).updateUserProfileDate(
-        user.uid,
-        user.displayName,
-        user.displayName,
-        'I am' + user.displayName,
-        'N'
-        //'Test About me...',
-//        DateTime.now(),
-//        '',
-//        '',
-//        '',
-//        '',
-//        0,
-      );
-
+      await DatabaseService(uid: user.uid).updateUserProfileData(user.uid,
+          user.displayName, user.displayName, 'I am' + user.displayName, 'N'
+          );
       return user;
     } catch (e) {
       print(e.toString());

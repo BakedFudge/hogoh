@@ -1,166 +1,313 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hogoh/Models/commonHelper.dart';
+import 'package:hogoh/Models/doCusine.dart';
 import 'package:hogoh/Models/doUserProfile.dart';
 import 'package:hogoh/Screens/Profile/UserProfileEdit.dart';
 import 'package:hogoh/Services/database.dart';
 import 'package:hogoh/Shared/navigationBloc.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class UserProfile extends StatelessWidget with NavigationStates {
+
+
+class UserProfile extends StatelessWidget  {
   @override
   Widget build(BuildContext context) {
-    print('inside');
-    var uid = Provider.of<doUserProfile>(context).uid;
+
+
+    final FBuser = Provider.of<FirebaseUser>(context);
+    String uid = FBuser.uid;
+    print('inside UserProfile');
+    //final doUserProfile user = Provider.of<doUserProfile>(context);
+
+//    var user = Provider.of<doUserProfile>(context);
+//    var uid = user.uid;
+//    var uname = user.username;
+//   final  List<doCusine> cusines = Provider.of<List<doCusine>>(context);
+
+//    print('Uid = $uid');
+//    print('Uname : $uname');
+//    print(cusines);
+
     bool isEditMode = false;
-    return MultiProvider(
-        providers: [
-          StreamProvider<doUserProfile>.value(
-            value: DatabaseService().getCurrentUserFromSnapshot(uid),
-          )
-        ],
-        child: SafeArea(
-          child: Scaffold(
-              backgroundColor: Color(hexColor('#F7FFF7')),
-              body: Container(
-                color: Color(hexColor('#F7FFF7')),
-                // height: MediaQuery.of(context).size.height,
-                child: ListView(
-                  children: <Widget>[
-                    Container(
-                      height: 1000, // MediaQuery.of(context).size.height,
-                      child: Stack(
-                        alignment: AlignmentDirectional.topCenter,
-                        children: <Widget>[
-                          //Avatar
-                          Positioned(
-                            top: 100.0,
-                            child: Container(
-                                width: 180.0,
-                                height: 180.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(hexColor('#7bed9f')),
-                                )),
-                          ),
+//    StreamProvider<doUserProfile>.value(
+//      value: DatabaseService().getCurrentUserFromSnapshot(uid),
+//    );
 
-                          //Name Details
-
-                          Positioned(
-                            top: 200,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
-                              child: Container(
-                                //padding:EdgeInsets.only(top:20.0),
-                                height: 230.0,
-                                width: MediaQuery.of(context).size.width - 30,
-                                color: Colors.white70,
-                                child: Stack(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 80.0),
-                                      child: UserDetailHeader(),
-                                    ),
-                                    //Emoticons
-                                    Wrap(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 160.0, left: 80),
-                                          child: new Icon(
-                                            FontAwesomeIcons.grinWink,
-                                            color: Colors.lightGreen,
-                                            size: 40.0,
-                                            //radius: 20.0,
-                                          ),
-                                        ),
-                                        SizedBox(width: 30),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 160.0),
-                                          child: new Icon(
-                                            FontAwesomeIcons.grinHearts,
-                                            color: Colors.amber,
-                                            size: 40.0,
-                                            //radius: 20.0,
-                                          ),
-                                        ),
-                                        SizedBox(width: 30),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 160.0),
-                                          child: new Icon(
-                                            FontAwesomeIcons.smileBeam,
-                                            color: Colors.pink,
-                                            size: 40.0,
-                                            //radius: 20.0,
-                                          ),
-                                        ),
-                                        SizedBox(width: 30),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 160.0),
-                                          child: new Icon(
-                                            FontAwesomeIcons.grinTears,
-                                            color: Colors.blue,
-                                            size: 40.0,
-                                            //radius: 20.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          // Inside Circle Avatar
-
-                          Positioned(
-                            top: 120,
-                            child: Container(
-                              width: 150.0,
-                              height: 150.0,
-                              decoration: new BoxDecoration(
+    return StreamProvider<doUserProfile>.value(
+      value: DatabaseService().getCurrentUserFromSnapshot(uid),
+      child: SafeArea(
+        child: Scaffold(
+            backgroundColor: Color(hexColor('#F7FFF7')),
+            body: Container(
+              color: Color(hexColor('#F7FFF7')),
+              // height: MediaQuery.of(context).size.height,
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                    height: 1000, // MediaQuery.of(context).size.height,
+                    child: Stack(
+                      alignment: AlignmentDirectional.topCenter,
+                      children: <Widget>[
+                        //Avatar
+                        Positioned(
+                          top: 100.0,
+                          child: Container(
+                              width: 180.0,
+                              height: 180.0,
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Color(hexColor('#2ed573')),
+                                color: Color(hexColor('#7bed9f')),
+                              )),
+                        ),
+
+                        //Name Details
+
+                        Positioned(
+                          top: 200,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Container(
+                              //padding:EdgeInsets.only(top:20.0),
+                              height: 230.0,
+                              width: MediaQuery.of(context).size.width - 30,
+                              color: Colors.white70,
+                              child: Stack(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 80.0),
+                                    child: UserDetailHeader(),
+                                  ),
+                                  //Emoticons
+                                  Wrap(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 160.0, left: 80),
+                                        child: new Icon(
+                                          FontAwesomeIcons.grinWink,
+                                          color: Colors.lightGreen,
+                                          size: 40.0,
+                                          //radius: 20.0,
+                                        ),
+                                      ),
+                                      SizedBox(width: 30),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.only(top: 160.0),
+                                        child: new Icon(
+                                          FontAwesomeIcons.grinHearts,
+                                          color: Colors.amber,
+                                          size: 40.0,
+                                          //radius: 20.0,
+                                        ),
+                                      ),
+                                      SizedBox(width: 30),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.only(top: 160.0),
+                                        child: new Icon(
+                                          FontAwesomeIcons.smileBeam,
+                                          color: Colors.pink,
+                                          size: 40.0,
+                                          //radius: 20.0,
+                                        ),
+                                      ),
+                                      SizedBox(width: 30),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.only(top: 160.0),
+                                        child: new Icon(
+                                          FontAwesomeIcons.grinTears,
+                                          color: Colors.blue,
+                                          size: 40.0,
+                                          //radius: 20.0,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           ),
+                        ),
 
-                          //Detail body
-                          Positioned(
-                            top: 450,
-                            //bottom:1000,
-                            child: Container(
-                                //padding: EdgeInsets.all(20),
-                                height: MediaQuery.of(context).size.height,
-                                width: MediaQuery.of(context).size.width - 30,
-                                child: UserDetailBody()),
-                          ),
+                        // Inside Circle Avatar
 
-                          //Detail body
-                          Positioned(
-                            top: 450,
-                            child: Container(
-                                //padding: EdgeInsets.all(20),
-                                height: MediaQuery.of(context).size.height,
-                                width: MediaQuery.of(context).size.width - 30,
-                                child: UserDetailBody()),
+                        Positioned(
+                          top: 120,
+                          child: Container(
+                            width: 150.0,
+                            height: 150.0,
+                            decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(hexColor('#2ed573')),
+                            ),
                           ),
-                          SizedBox(height: 120),
-                        ],
-                      ),
+                        ),
+
+                        //Detail body
+                        Positioned(
+                          top: 450,
+                          //bottom:1000,
+                          child: Container(
+                            //padding: EdgeInsets.all(20),
+                              height: MediaQuery.of(context).size.height,
+                              width: MediaQuery.of(context).size.width - 30,
+                              child: UserDetailBody()),
+                        ),
+
+                        SizedBox(height: 120),
+                      ],
                     ),
-                  ],
-                ),
-              )),
-        ));
+                  ),
+                ],
+              ),
+            )),
+      ),
+    );
+
+//    return MultiProvider(
+//        providers: [
+//          StreamProvider<doUserProfile>(
+//            create: (context) => DatabaseService().getCurrentUserFromSnapshot(uid),
+//          ),
+//          StreamProvider<List<doCusine>>.value(
+//            value:  DatabaseService().getCuisines(),
+//          ),
+//        ],
+//        child: SafeArea(
+//          child: Scaffold(
+//              backgroundColor: Color(hexColor('#F7FFF7')),
+//              body: Container(
+//                color: Color(hexColor('#F7FFF7')),
+//                // height: MediaQuery.of(context).size.height,
+//                child: ListView(
+//                  children: <Widget>[
+//                    Container(
+//                      height: 1000, // MediaQuery.of(context).size.height,
+//                      child: Stack(
+//                        alignment: AlignmentDirectional.topCenter,
+//                        children: <Widget>[
+//                          //Avatar
+//                          Positioned(
+//                            top: 100.0,
+//                            child: Container(
+//                                width: 180.0,
+//                                height: 180.0,
+//                                decoration: BoxDecoration(
+//                                  shape: BoxShape.circle,
+//                                  color: Color(hexColor('#7bed9f')),
+//                                )),
+//                          ),
+//
+//                          //Name Details
+//
+//                          Positioned(
+//                            top: 200,
+//                            child: ClipRRect(
+//                              borderRadius: BorderRadius.circular(15.0),
+//                              child: Container(
+//                                //padding:EdgeInsets.only(top:20.0),
+//                                height: 230.0,
+//                                width: MediaQuery.of(context).size.width - 30,
+//                                color: Colors.white70,
+//                                child: Stack(
+//                                  children: <Widget>[
+//                                    Padding(
+//                                      padding: EdgeInsets.only(top: 80.0),
+//                                      child: UserDetailHeader(),
+//                                    ),
+//                                    //Emoticons
+//                                    Wrap(
+//                                      children: <Widget>[
+//                                        Padding(
+//                                          padding: const EdgeInsets.only(
+//                                              top: 160.0, left: 80),
+//                                          child: new Icon(
+//                                            FontAwesomeIcons.grinWink,
+//                                            color: Colors.lightGreen,
+//                                            size: 40.0,
+//                                            //radius: 20.0,
+//                                          ),
+//                                        ),
+//                                        SizedBox(width: 30),
+//                                        Padding(
+//                                          padding:
+//                                              const EdgeInsets.only(top: 160.0),
+//                                          child: new Icon(
+//                                            FontAwesomeIcons.grinHearts,
+//                                            color: Colors.amber,
+//                                            size: 40.0,
+//                                            //radius: 20.0,
+//                                          ),
+//                                        ),
+//                                        SizedBox(width: 30),
+//                                        Padding(
+//                                          padding:
+//                                              const EdgeInsets.only(top: 160.0),
+//                                          child: new Icon(
+//                                            FontAwesomeIcons.smileBeam,
+//                                            color: Colors.pink,
+//                                            size: 40.0,
+//                                            //radius: 20.0,
+//                                          ),
+//                                        ),
+//                                        SizedBox(width: 30),
+//                                        Padding(
+//                                          padding:
+//                                              const EdgeInsets.only(top: 160.0),
+//                                          child: new Icon(
+//                                            FontAwesomeIcons.grinTears,
+//                                            color: Colors.blue,
+//                                            size: 40.0,
+//                                            //radius: 20.0,
+//                                          ),
+//                                        ),
+//                                      ],
+//                                    ),
+//                                  ],
+//                                ),
+//                              ),
+//                            ),
+//                          ),
+//
+//                          // Inside Circle Avatar
+//
+//                          Positioned(
+//                            top: 120,
+//                            child: Container(
+//                              width: 150.0,
+//                              height: 150.0,
+//                              decoration: new BoxDecoration(
+//                                shape: BoxShape.circle,
+//                                color: Color(hexColor('#2ed573')),
+//                              ),
+//                            ),
+//                          ),
+//
+//                          //Detail body
+//                          Positioned(
+//                            top: 450,
+//                            //bottom:1000,
+//                            child: Container(
+//                                //padding: EdgeInsets.all(20),
+//                                height: MediaQuery.of(context).size.height,
+//                                width: MediaQuery.of(context).size.width - 30,
+//                                child: UserDetailBody()),
+//                          ),
+//
+//                          SizedBox(height: 120),
+//                        ],
+//                      ),
+//                    ),
+//                  ],
+//                ),
+//              )),
+//        ));
   }
 }
 
@@ -169,6 +316,11 @@ class UserDetailHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     print('Inside Detail Header');
     final doUserProfile currUser = Provider.of<doUserProfile>(context);
+//    final  List<doCusine> cusines = Provider.of<List<doCusine>>(context);
+
+//    print('Cusines : $cusines');
+
+
     print(currUser.nickname);
     return ListTile(
       title: Text(
@@ -228,6 +380,7 @@ class UserDetailBody extends StatefulWidget {
 }
 
 class _UserDetailBodyState extends State<UserDetailBody> {
+
   final List<CusinesFilterEntry> _cusines = <CusinesFilterEntry>[
     const CusinesFilterEntry('Indian'),
     const CusinesFilterEntry('Chinese'),
@@ -238,7 +391,14 @@ class _UserDetailBodyState extends State<UserDetailBody> {
   ];
   List<String> _filters = <String>[];
 
-  Iterable<Widget> get actorWidgets sync* {
+  void showEditPanel(){
+    showModalBottomSheet(context: context, builder: (context){
+      return UserProfileEdit();
+    });
+  }
+  bool  isEditMode=false;
+
+  Iterable<Widget> get fCusines sync* {
     for (CusinesFilterEntry actor in _cusines) {
       yield Padding(
         padding: const EdgeInsets.all(4.0),
@@ -261,10 +421,16 @@ class _UserDetailBodyState extends State<UserDetailBody> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     print("UserDetailBody");
     var currUser = Provider.of<doUserProfile>(context);
+
+      List<doCusine> cusines = Provider.of<List<doCusine>>(context);
+    print('Cuisines =  $cusines');
+
+
     print(currUser.nickname);
     return ClipRRect(
       borderRadius: BorderRadius.circular(15.0),
@@ -279,9 +445,10 @@ class _UserDetailBodyState extends State<UserDetailBody> {
             ListTile(
               trailing: FloatingActionButton(
                   onPressed: () {
-                    Hero(
-                      tag: 'edit',
-                        child: UserProfileEdit());
+                    print('edit');
+                    isEditMode = true;
+                    print(isEditMode);
+                       showEditPanel();
                   },
                   backgroundColor: Colors.white,
                   child: Icon(
@@ -310,7 +477,9 @@ class _UserDetailBodyState extends State<UserDetailBody> {
               ),
             ),
             Wrap(
-              children: actorWidgets.toList(),
+
+              children:
+               fCusines.toList(),
             ),
             SizedBox(
               height: 20,

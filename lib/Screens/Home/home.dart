@@ -70,29 +70,30 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 //  }
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<List<doUserProfile>>.value(
-      value: DatabaseService().getUserProfiles,
-      child: SafeArea(
-        child: Scaffold(
-            backgroundColor: Color(hexColor('#F7FFF7')),
-            body:
-            CustomScrollView(
-              slivers: <Widget>[
-                SliverPersistentHeader(
-                  pinned: true,
-                  floating: true,
-                  delegate: CustomSliverDelegate(
-                    expandedHeight: 400,
-                  ),
+
+    //final doUserProfile user = Provider.of<doUserProfile>(context);
+
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: Color(hexColor('#F7FFF7')),
+          body:
+          CustomScrollView(
+            slivers: <Widget>[
+              SliverPersistentHeader(
+                pinned: true,
+                floating: true,
+                delegate: CustomSliverDelegate(
+                  expandedHeight: 400,
                 ),
-                SliverList(
-                    delegate: SliverChildListDelegate(<Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        //Filters
+              ),
+              SliverList(
+                  delegate: SliverChildListDelegate(<Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      //Filters
 //                        ListTile(
 //                          title:
 //
@@ -107,96 +108,95 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 //                            ),
 //                          ),
 //                        ),
-                        //EDIT BUTTON
+                      //EDIT BUTTON
 
-                        //Cusines
-                        Text(
-                          'Fav Cuisines :',
-                          style: TextStyle(
-                            color: Color(hexColor('#1A535C')),
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w400,
+                      //Cusines
+                      Text(
+                        'Fav Cuisines :',
+                        style: TextStyle(
+                          color: Color(hexColor('#1A535C')),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Wrap(
+                        children: actorWidgets.toList(),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      //Dish
+                      Text(
+                        'Fav Dish :',
+                        style: TextStyle(
+                          color: Color(hexColor('#1A535C')),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      //Fav Dish
+                      Wrap(
+                        children: <Widget>[
+                          Icon(
+                            FontAwesomeIcons.hamburger,
+                            color: Colors.lightGreen,
+                            size: 40.0,
+                            //radius: 20.0,
                           ),
-                        ),
-                        Wrap(
-                          children: actorWidgets.toList(),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        //Dish
-                        Text(
-                          'Fav Dish :',
-                          style: TextStyle(
-                            color: Color(hexColor('#1A535C')),
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w400,
+                          SizedBox(width: 30),
+                          Icon(
+                            FontAwesomeIcons.pizzaSlice,
+                            color: Colors.amber,
+                            size: 40.0,
+                            //radius: 20.0,
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        //Fav Dish
-                        Wrap(
-                          children: <Widget>[
-                            Icon(
-                              FontAwesomeIcons.hamburger,
-                              color: Colors.lightGreen,
-                              size: 40.0,
-                              //radius: 20.0,
-                            ),
-                            SizedBox(width: 30),
-                            Icon(
-                              FontAwesomeIcons.pizzaSlice,
-                              color: Colors.amber,
-                              size: 40.0,
-                              //radius: 20.0,
-                            ),
-                            SizedBox(width: 30),
-                            Icon(
-                              FontAwesomeIcons.birthdayCake,
-                              color: Colors.pink,
-                              size: 40.0,
-                              //radius: 20.0,
-                            ),
-                            SizedBox(width: 30),
-                            Icon(
-                              FontAwesomeIcons.iceCream,
-                              color: Colors.blue,
-                              size: 40.0,
-                              //radius: 20.0,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        //Foodies
-                        Text(
-                          'Fav Foodies :',
-                          style: TextStyle(
-                            color: Color(hexColor('#1A535C')),
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w400,
+                          SizedBox(width: 30),
+                          Icon(
+                            FontAwesomeIcons.birthdayCake,
+                            color: Colors.pink,
+                            size: 40.0,
+                            //radius: 20.0,
                           ),
+                          SizedBox(width: 30),
+                          Icon(
+                            FontAwesomeIcons.iceCream,
+                            color: Colors.blue,
+                            size: 40.0,
+                            //radius: 20.0,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      //Foodies
+                      Text(
+                        'Fav Foodies :',
+                        style: TextStyle(
+                          color: Color(hexColor('#1A535C')),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w400,
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
 
-                        Wrap(),
-                      ],
-                    ),
+                      Wrap(),
+                    ],
                   ),
-                ])),
-                SliverFillRemaining(
-                  child: Center(
-                    child: Text("data"),
-                  ),
-                )
-              ],
-            )),
-      ),
+                ),
+              ])),
+              SliverFillRemaining(
+                child: Center(
+                  child: Text("data"),
+                ),
+              )
+            ],
+          )),
     );
   }
 }
